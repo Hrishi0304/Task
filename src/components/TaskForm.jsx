@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { TaskContext } from '../context/TaskContext';
 
 export default function TaskForm() {
+  const { addTask } = useContext(TaskContext);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     createdDate: '',
     dueDate: '',
     status: false,
-    priority: 'Medium' // Default value for priority
+    priority: 'Medium' 
   });
 
   const handleInputChange = (e) => {
@@ -21,7 +23,22 @@ export default function TaskForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Task Data:', formData);
-    // Logic to handle form submission (e.g., adding task)
+    const newTask = {
+      ...formData,
+      id: Date.now(),
+      completed: formData.status
+    };
+
+    addTask(newTask);
+
+    setFormData({
+      title: '',
+      description: '',
+      createdDate: '',
+      dueDate: '',
+      status: false,
+      priority: 'Medium'
+    });
   };
 
   return (

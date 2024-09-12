@@ -4,17 +4,20 @@ import ViewTasks from './pages/ViewTasks';
 import Home from './pages/Home';
 import AddTask from './pages/AddTask';
 import Layout from './pages/Layout';
+import { TaskProvider } from './context/TaskContext'; // Import TaskProvider
 
 function App() {
   return (
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path='/tasks' element={<ViewTasks/>}/>
-          <Route path='/add' element={<AddTask/>}/>
-        </Routes>
-      </Layout>
+      <TaskProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path='/tasks' element={<ViewTasks />} />
+            <Route path='/add' element={<AddTask />} />
+          </Routes>
+        </Layout>
+      </TaskProvider>
     </BrowserRouter>
   );
 }
